@@ -156,3 +156,35 @@ ex.:
 Now you can access to yoursite.com/hello-world and see in page "Hello World"
 
 *Be careful*: routes.php are lowercase and plural
+
+## How to create a modular packages
+
+In composer.json specify dependency for dnafactory/laravel-modular
+
+Create a ServiceProvider that extends \DNAFactory\Core\Provider\ModuleRegisterServiceProvider
+
+Implements getModuleName, specifing a Module name
+
+`public function getModuleName() { return 'ModuleName'; }`
+
+Implements getBasePath, specifing a root path of module
+
+If files are stored in root:
+
+` public function getBasePath(){ return __DIR__ . DIRECTORY_SEPARATOR . '..'; }`
+
+If files are stored in src:
+
+` public function getBasePath(){ return __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src'; }`
+
+Add This service provider in AutoDiscover
+
+`"extra": {
+         "laravel": {
+             "providers": [
+                 "VendorName\\ModuleName\\Provider\\NameOfServiceProvider"
+             ]
+         }
+     },`
+
+You can see an example in \DNAFactory\Core\Provider\ExampleModuleRegisterServiceProvider of this module
