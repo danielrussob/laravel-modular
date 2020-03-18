@@ -1,0 +1,29 @@
+{
+    "name": "dnafactory/laravel-modular",
+    "description": "Transform laravel in a modular system",
+    "homepage": "https://github.com/danielrussob/laravel-modular.git",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "authors": [
+        {
+            "name": "Daniel Russo",
+            "email": "daniel@dnafactory.it",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "DNAFactory\\Core\\": ""
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "DNAFactory\\Core\\Provider\\ModuleFinderServiceProvider"
+            ]
+        }
+    },
+    "prefer-stable": true
+}
