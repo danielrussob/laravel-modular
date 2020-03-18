@@ -2,9 +2,16 @@
 
 ## Usage
 
+Install
+
+`composer require dnafactory/laravel-modular`
+
 Create a folder Modules under app
 
 -----> app/Modules
+
+
+That's it!
 
 ## Create a Module
 
