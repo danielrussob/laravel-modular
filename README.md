@@ -26,6 +26,12 @@ that's it!
     app
     ├── Modules
     ├────── Module1
+    ├──────────── Api
+    ├───────────────── Data
+    ├───────────────────── OneInterface.php
+    ├───────────────────── TwoInterface.php
+    ├───────────────── OneRepositoryInterface.php
+    ├───────────────── TwoManagementInterface.php
     ├──────────── Command
     ├───────────────── Command1.php
     ├───────────────── Command2.php
@@ -38,25 +44,42 @@ that's it!
     ├──────────── Controller
     ├───────────────── OneController.php
     ├───────────────── TwoController.php
+    ├──────────── Management
+    ├───────────────── OneManagement.php
+    ├───────────────── TwoManagement.php
     ├──────────── etc
     ├───────────────── commands.php
     ├───────────────── di.php
     ├───────────────── providers.php
-    ├──────────── Provider
-    ├───────────────── OneServiceProvider.php
-    ├───────────────── TwoServiceProvider.php
-    ├───────────────── ThreeServiceProvider.php
-    ├──────────── Factory
-    ├───────────────── OneFactory.php
-    ├───────────────── TwoFactory.php
-    ├───────────────── ThreeFactory.php
     ├──────────── factories
     ├───────────────── One.php
     ├───────────────── Two.php
     ├───────────────── Three.php
+    ├──────────── Factory
+    ├───────────────── OneFactory.php
+    ├───────────────── TwoFactory.php
+    ├───────────────── ThreeFactory.php
+    ├──────────── Management
+    ├───────────────── OneManagement.php
+    ├───────────────── TwoManagement.php
+    ├───────────────── ThreeManagement.php
+    ├──────────── Middleware
+    ├───────────────── OneMiddleware.php
+    ├───────────────── TwoMiddleware.php
+    ├───────────────── ThreeMiddleware.php
     ├──────────── migrations
     ├───────────────── 2000_00_00_000010_create_first_table.php
     ├───────────────── 2000_00_00_000020_create_second_table.php
+    ├──────────── Provider
+    ├───────────────── OneServiceProvider.php
+    ├───────────────── TwoServiceProvider.php
+    ├───────────────── ThreeServiceProvider.php
+    ├──────────── Queue
+    ├───────────────── OnePublisher.php
+    ├───────────────── OneConsumer.php
+    ├──────────── Repository
+    ├───────────────── OneRepository.php
+    ├───────────────── TwoRepository.php
     ├──────────── views
     ├───────────────── first.blade.php
     ├───────────────── second.blade.php
@@ -68,6 +91,28 @@ that's it!
     ├────── Module3
     ├──────────── ...
     ├──────────── ...
+
+### Api folder
+
+All files in this folder are Service Contract's file of: Facade, Proxy, Mediator, Strategy or generic Service
+
+All files are interface
+
+Don't forget to register this class in etc/di.php
+
+*Be careful*: Api has first letter in uppercase and singular
+
+
+### Api/Data folder
+
+All files in this folder are Service Contract's file of: Model or generic Data Class
+
+All files are interface
+
+Don't forget to register this class in etc/di.php
+
+*Be careful*: Data has first letter in uppercase and singular
+
 
 ### Command folder
 
@@ -145,23 +190,6 @@ commands.php are an array of all commands in module
 ];
 ```
 
-### Provider folder
-
-All files in this folder are custom Provider
-
-Don't forget to register all providers in etc/providers.php
-
-All files must terminate with ServiceProvider word
-
-*Be careful*: Provider has first letter in uppercase and singular
-
-### Factory folder
-
-All files in this folder are custom Factory
-
-All files must terminate with Factory word
-
-*Be careful*: Factory has first letter in uppercase and singular
 
 ### factories folder
 
@@ -172,12 +200,71 @@ then you could use factory(One::class) as if One.php was declared in factories f
 *Be careful*: factories are lowercase and plural
 
 
+### Factory folder
+
+All files in this folder are custom Factory
+
+All files must terminate with Factory word
+
+*Be careful*: Factory has first letter in uppercase and singular
+
+See Factory Pattern in https://refactoring.guru/design-patterns/factory-method
+
+### Management folder
+
+All files in this folder are Management
+
+Place here all: Facade, Proxy, Mediator, Strategy or generic Service
+
+All files must terminate with Management word. 
+You must not specify pattern in filename.
+
+*Be careful*: Management has first letter in uppercase and singular
+
+See Facade pattern: https://refactoring.guru/design-patterns/facade
+See Proxy pattern: https://refactoring.guru/design-patterns/proxy
+See Mediator pattern: https://refactoring.guru/design-patterns/mediator
+See Strategy pattern: https://refactoring.guru/design-patterns/strategy
+
+### Middleware folder
+
+All files in this folder are Middleware file
+
+*Be careful*: Middleware has first letter in uppercase and singular
+
 ### migrations folder
 
 All files in this folder will be consider migrations and will be executed in alphanumeric order (by all migrations in all modules)
 
 *Be careful*: migrations are lowercase and plural
 
+
+### Provider folder
+
+All files in this folder are custom Provider
+
+Don't forget to register all providers in etc/providers.php
+
+All files must terminate with ServiceProvider word
+
+*Be careful*: Provider has first letter in uppercase and singular
+
+
+### Queue folder
+
+All files in this folder are publisher / consumer queue
+
+All files must terminate with Publisher or Consumer word
+
+*Be careful*: Queue has first letter in uppercase and singular
+
+### Repository folder
+
+All files in this folder are Repository
+
+All files must terminate with Repository word
+
+*Be careful*: Repository has first letter in uppercase and singular
 
 ### views folder
 
