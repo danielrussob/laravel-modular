@@ -80,6 +80,9 @@ that's it!
     ├──────────── Repository
     ├───────────────── OneRepository.php
     ├───────────────── TwoRepository.php
+    ├──────────── Seed
+    ├───────────────── OneSeeder.php
+    ├───────────────── TwoSeeder.php
     ├──────────── views
     ├───────────────── first.blade.php
     ├───────────────── second.blade.php
@@ -265,6 +268,16 @@ All files in this folder are Repository
 All files must terminate with Repository word
 
 *Be careful*: Repository has first letter in uppercase and singular
+
+### Seed folder
+
+All files in this folder are Seeder
+
+All files must terminate with Seed word
+
+Remember to extend \Illuminate\Database\Seeder
+
+*Be careful*: Seeder has first letter in uppercase and singular
 
 ### views folder
 
