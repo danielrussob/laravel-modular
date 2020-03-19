@@ -26,6 +26,9 @@ that's it!
     app
     ├── Modules
     ├────── Module1
+    ├──────────── Command
+    ├───────────────── Command1.php
+    ├───────────────── Command2.php
     ├──────────── configs
     ├───────────────── one.php
     ├───────────────── two.php
@@ -33,6 +36,7 @@ that's it!
     ├───────────────── foldername
     ├───────────────────── four.php
     ├──────────── etc
+    ├───────────────── commands.php
     ├───────────────── di.php
     ├───────────────── providers.php
     ├──────────── factories
@@ -53,6 +57,12 @@ that's it!
     ├────── Module3
     ├──────────── ...
     ├──────────── ...
+
+### Command folder
+
+All files in this folder are Console Command
+
+*Be careful*: Command has first letter in uppercase and singular
 
 ### configs folder
 
@@ -96,6 +106,16 @@ providers.php are an array of all service provider in module
 `<?php return [
     Provider1::class,
     Provider2::class
+];
+`
+
+#### commands.php
+
+commands.php are an array of all commands in module
+
+`<?php return [
+    Command1::class,
+    Command2::class
 ];
 `
 

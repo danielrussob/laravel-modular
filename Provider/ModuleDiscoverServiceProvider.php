@@ -45,6 +45,7 @@ abstract class ModuleDiscoverServiceProvider extends ServiceProvider
         $this->loadRoutes($modulePath, $moduleName);
 
         $this->loadServiceProviders($modulePath, $moduleName);
+        $this->loadCommands($modulePath, $moduleName);
     }
 
     protected function registerModule($modulePath, $moduleName)
@@ -175,6 +176,22 @@ abstract class ModuleDiscoverServiceProvider extends ServiceProvider
                 foreach ($singletons as $interface => $concrete) {
                     $this->app->singleton($interface, $concrete);
                 }
+            }
+        }
+    }
+
+    protected function loadCommands($modulePath, $moduleName)
+    {
+        if ($this->app->runningInConsole()) {
+            $commandFolder = $modulePath . DIRECTORY_SEPARATOR . 'etc' . DIRECTORY_SEPARATOR . 'commands.php';
+            if (file_exists($commandFolder)) {
+                $commands = require $commandFolder;
+
+                if (!is_array($commands)) {
+                    throw new \Exception(sprintf("Attenzione, il file di comandi di %s deve esser un array di classi", $moduleName));
+                }
+
+                $this->commands($commands);
             }
         }
     }
