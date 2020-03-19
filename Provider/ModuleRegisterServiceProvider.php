@@ -7,18 +7,26 @@ use Illuminate\Database\Eloquent\Factory;
 
 abstract class ModuleRegisterServiceProvider extends ModuleDiscoverServiceProvider
 {
-    abstract public function getBasePath();
-
-    abstract public function getModuleName();
+    public function register()
+    {
+        $module = $this->getCurrentModule();
+        $this->bootModule($module['path'], $module['name']);
+    }
 
     public function boot()
     {
+        $module = $this->getCurrentModule();
+        $this->bootModule($module['path'], $module['name']);
+    }
+
+    protected function getCurrentModule()
+    {
         $basePath = $this->getBasePath();
         if (!file_exists($basePath)) {
-            return;
+            return [];
         }
 
         $moduleName = $this->getModuleName();
-        $this->loadModule($basePath, $moduleName);
+        return ['name' => $moduleName, 'path' => $basePath];
     }
 }

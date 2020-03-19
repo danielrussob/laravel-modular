@@ -18,11 +18,31 @@ class ModuleFinderServiceProvider extends ModuleDiscoverServiceProvider
         return 'NotUsedHere';
     }
 
+    public function register()
+    {
+        $modules = $this->getAllModules();
+
+        foreach ($modules as $module) {
+            $this->registerModule($module['path'], $module['name']);
+        }
+    }
+
     public function boot()
     {
+        $modules = $this->getAllModules();
+
+        foreach ($modules as $module) {
+            $this->bootModule($module['path'], $module['name']);
+        }
+    }
+
+    protected function getAllModules()
+    {
+        $modules = [];
+
         $basePath = $this->getBasePath();
         if (!file_exists($basePath)) {
-            return;
+            return $modules;
         }
 
         $directories = new \DirectoryIterator($basePath);
@@ -38,7 +58,9 @@ class ModuleFinderServiceProvider extends ModuleDiscoverServiceProvider
             $moduleName = $fileinfo->getFilename();
             $modulePath = $basePath . DIRECTORY_SEPARATOR . $moduleName;
 
-            $this->loadModule($modulePath, $moduleName);
+            $modules[] = ['name' => $moduleName, 'path' => $modulePath];
         }
+
+        return $modules;
     }
 }

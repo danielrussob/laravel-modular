@@ -5,22 +5,35 @@ namespace DNAFactory\Core\Provider;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
+/**
+ * Class ModuleDiscoverServiceProvider
+ *
+ * Base class to help Finder or Register
+ * @package DNAFactory\Core\Provider
+ */
 abstract class ModuleDiscoverServiceProvider extends ServiceProvider
 {
-    abstract public function getBasePath();
-    abstract public function getModuleName();
+    public function getBasePath()
+    {
+        throw new \Exception("Devi implementare il metodo getBasePath() del service provider");
+    }
+
+    public function getModuleName()
+    {
+        throw new \Exception("Devi implementare il metodo getModuleName() del service provider");
+    }
 
     public function register()
     {
-
+        throw new \Exception("Devi implementare il metodo register() del service provider");
     }
 
     public function boot()
     {
-
+        throw new \Exception("Devi implementare il metodo boot() del service provider");
     }
 
-    protected function loadModule($modulePath, $moduleName)
+    protected function bootModule($modulePath, $moduleName)
     {
         $this->loadConfigs($modulePath, $moduleName);
         $this->loadHelper($modulePath, $moduleName);
@@ -32,6 +45,10 @@ abstract class ModuleDiscoverServiceProvider extends ServiceProvider
         $this->loadRoutes($modulePath, $moduleName);
 
         $this->loadServiceProviders($modulePath, $moduleName);
+    }
+
+    protected function registerModule($modulePath, $moduleName)
+    {
         $this->loadDependencyInjection($modulePath, $moduleName);
     }
 
