@@ -121,7 +121,7 @@ di.php are an array of di in module
         Interface4::class => Concrete4::class,
     ],
 ];
-```php
+```
 
 #### providers.php
 
