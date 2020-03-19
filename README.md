@@ -35,10 +35,21 @@ that's it!
     ├───────────────── three.php
     ├───────────────── foldername
     ├───────────────────── four.php
+    ├──────────── Controller
+    ├───────────────── OneController.php
+    ├───────────────── TwoController.php
     ├──────────── etc
     ├───────────────── commands.php
     ├───────────────── di.php
     ├───────────────── providers.php
+    ├──────────── Provider
+    ├───────────────── OneServiceProvider.php
+    ├───────────────── TwoServiceProvider.php
+    ├───────────────── ThreeServiceProvider.php
+    ├──────────── Factory
+    ├───────────────── OneFactory.php
+    ├───────────────── TwoFactory.php
+    ├───────────────── ThreeFactory.php
     ├──────────── factories
     ├───────────────── One.php
     ├───────────────── Two.php
@@ -72,12 +83,24 @@ You can refer to it as config('MODULENAME.FILENAME') or config('MODULENAME.FOLDE
 
 ex.: 
 
-`config('module1.one')`
+```php
+config('module1.one');
+```
 
-`config('module1.foldername.four')`
+```php
+config('module1.foldername.four');
+```
 
 *Be careful*: configs are lowercase and plural
 
+
+### Controller folder
+
+All files in this folder are Controller
+
+All files must terminate with Controller word
+
+*Be careful*: Controller has first letter in uppercase and singular
 
 ### etc folder
 
@@ -87,7 +110,8 @@ There's some defined configuration in this folder
 
 di.php are an array of di in module
 
-`<?php return [
+```php
+<?php return [
     'bind' => [
         Interface1::class => Concrete1::class,
         Interface2::class => Concrete2::class,
@@ -97,31 +121,51 @@ di.php are an array of di in module
         Interface4::class => Concrete4::class,
     ],
 ];
-`
+```php
 
 #### providers.php
 
 providers.php are an array of all service provider in module
 
-`<?php return [
+```php
+<?php return [
     Provider1::class,
     Provider2::class
 ];
-`
+```
 
 #### commands.php
 
 commands.php are an array of all commands in module
 
-`<?php return [
+```php
+<?php return [
     Command1::class,
     Command2::class
 ];
-`
+```
+
+### Provider folder
+
+All files in this folder are custom Provider
+
+Don't forget to register all providers in etc/providers.php
+
+All files must terminate with ServiceProvider word
+
+*Be careful*: Provider has first letter in uppercase and singular
+
+### Factory folder
+
+All files in this folder are custom Factory
+
+All files must terminate with Factory word
+
+*Be careful*: Factory has first letter in uppercase and singular
 
 ### factories folder
 
-All files in this folder will be consider factory
+All files in this folder will be consider laravel's factory
 
 then you could use factory(One::class) as if One.php was declared in factories folder of laravel
 
@@ -147,7 +191,9 @@ module1::first refer to first.blade.php
 
 module1::first.foo refer to first/foo.blade.php
 
-`return view('module1.first');`
+```php
+return view('module1.first');
+```
 
 *Be careful*: views are lowercase and plural
 
@@ -158,7 +204,9 @@ All functions in this file will be shared in all application
 
 ex.:
 
-`<?php function sum($a, $b) { return $a + $b; }`
+```php
+<?php function sum($a, $b) { return $a + $b; }
+```
 
 Now you can use sum($a, $b) in all Class of your application
 
@@ -171,11 +219,27 @@ All routes in this file will be shared in all application
 
 ex.:
 
-`<?php Route::get('/hello-world', function (){ echo 'Hello World'; });`
+```php
+<?php Route::get('/hello-world', function (){ echo 'Hello World'; });
+```
 
 Now you can access to yoursite.com/hello-world and see in page "Hello World"
 
 *Be careful*: routes.php are lowercase and plural
+
+## How to register a Cron
+
+Create a file in Provider folder called RegisterCronServiceProvider that extends \DNAFactory\Core\Provider\RegisterCronServiceProvider
+
+Implement protected method registerCron(Schedule $schedule) like this
+
+```php
+protected function registerCron(Schedule $schedule) {
+    $schedule->command('command:name')->everyMinute();
+}
+```
+
+Now register this ServiceProvider in etc/providers.php
 
 ## How to create a modular packages
 
@@ -185,26 +249,36 @@ Create a ServiceProvider that extends \DNAFactory\Core\Provider\ModuleRegisterSe
 
 Implements getModuleName, specifing a Module name
 
-`public function getModuleName() { return 'ModuleName'; }`
+```php
+public function getModuleName() { return 'ModuleName'; } 
+```
 
 Implements getBasePath, specifing a root path of module
 
 If files are stored in root:
 
-` public function getBasePath(){ return __DIR__ . DIRECTORY_SEPARATOR . '..'; }`
+```php
+public function getBasePath(){ return __DIR__ . DIRECTORY_SEPARATOR . '..'; }
+```
 
 If files are stored in src:
 
-` public function getBasePath(){ return __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src'; }`
+```php 
+public function getBasePath(){ 
+    return __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src'; 
+} 
+```
 
 Add This service provider in AutoDiscover
 
-`"extra": {
+```json
+"extra": {
          "laravel": {
              "providers": [
                  "VendorName\\ModuleName\\Provider\\NameOfServiceProvider"
              ]
          }
-     },`
+     },
+```
 
 You can see an example in \DNAFactory\Core\Provider\ExampleModuleRegisterServiceProvider of this module
