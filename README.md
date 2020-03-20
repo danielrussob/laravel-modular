@@ -70,6 +70,10 @@ that's it!
     ├──────────── migrations
     ├───────────────── 2000_00_00_000010_create_first_table.php
     ├───────────────── 2000_00_00_000020_create_second_table.php
+    ├──────────── Model
+    ├───────────────── One.php
+    ├───────────────── Two.php
+    ├───────────────── Three.php
     ├──────────── Provider
     ├───────────────── OneServiceProvider.php
     ├───────────────── TwoServiceProvider.php
@@ -241,6 +245,11 @@ All files in this folder will be consider migrations and will be executed in alp
 
 *Be careful*: migrations are lowercase and plural
 
+### Model folder
+
+All files in this folder are Model
+
+*Be careful*: Model has first letter in uppercase and singular
 
 ### Provider folder
 
