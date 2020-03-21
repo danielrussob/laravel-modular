@@ -35,6 +35,8 @@ abstract class ModuleDiscoverServiceProvider extends ServiceProvider
 
     protected function bootModule($modulePath, $moduleName)
     {
+        $this->loadDependencyInjection($modulePath, $moduleName);
+
         $this->loadConfigs($modulePath, $moduleName);
         $this->loadHelper($modulePath, $moduleName);
         $this->loadFactories($modulePath, $moduleName);
@@ -50,7 +52,7 @@ abstract class ModuleDiscoverServiceProvider extends ServiceProvider
 
     protected function registerModule($modulePath, $moduleName)
     {
-        $this->loadDependencyInjection($modulePath, $moduleName);
+
     }
 
     protected function loadConfigs($modulePath, $moduleName)

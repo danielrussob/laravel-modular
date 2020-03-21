@@ -33,8 +33,8 @@ that's it!
     ├───────────────── OneRepositoryInterface.php
     ├───────────────── TwoManagementInterface.php
     ├──────────── Command
-    ├───────────────── Command1.php
-    ├───────────────── Command2.php
+    ├───────────────── OneCommand.php
+    ├───────────────── TwoCommand.php
     ├──────────── configs
     ├───────────────── one.php
     ├───────────────── two.php
