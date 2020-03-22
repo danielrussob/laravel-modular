@@ -32,6 +32,9 @@ that's it!
     ├───────────────────── TwoInterface.php
     ├───────────────── OneRepositoryInterface.php
     ├───────────────── TwoManagementInterface.php
+    ├──────────── Channel
+    ├───────────────── OneChannel.php
+    ├───────────────── TwoChannel.php
     ├──────────── Command
     ├───────────────── OneCommand.php
     ├───────────────── TwoCommand.php
@@ -51,6 +54,10 @@ that's it!
     ├───────────────── commands.php
     ├───────────────── di.php
     ├───────────────── providers.php
+    ├──────────── Event
+    ├───────────────── OneEvent.php
+    ├───────────────── TwoEvent.php
+    ├───────────────── ThreeEvent.php
     ├──────────── factories
     ├───────────────── One.php
     ├───────────────── Two.php
@@ -123,6 +130,11 @@ Don't forget to register this class in etc/di.php
 
 *Be careful*: Data has first letter in uppercase and singular
 
+### Channel folder
+
+All files in this folder are Event Channel
+
+*Be careful*: Channel has first letter in uppercase and singular
 
 ### Command folder
 
@@ -200,6 +212,11 @@ commands.php are an array of all commands in module
 ];
 ```
 
+### Event folder
+
+All files in this folder are Event or Broadcast Event
+
+*Be careful*: Event has first letter in uppercase and singular
 
 ### factories folder
 
