@@ -126,6 +126,7 @@ abstract class ModuleDiscoverServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes($modulePath, $moduleName);
         $this->mapWebRoutes($modulePath, $moduleName);
+        $this->mapChannelRoutes($modulePath, $moduleName);
     }
 
     protected function mapWebRoutes($modulePath, $moduleName)
@@ -146,6 +147,15 @@ abstract class ModuleDiscoverServiceProvider extends ServiceProvider
             Route::prefix('api')
                 ->middleware('api')
                 ->group($api);
+        }
+    }
+
+    protected function mapChannelRoutes($modulePath, $moduleName)
+    {
+        $channels = $modulePath . DIRECTORY_SEPARATOR . 'routes' . DIRECTORY_SEPARATOR . 'channels.php';
+
+        if (file_exists($channels)) {
+            require $channels;
         }
     }
 
