@@ -84,6 +84,9 @@ that's it!
     ├──────────── Repository
     ├───────────────── OneRepository.php
     ├───────────────── TwoRepository.php
+    ├──────────── routes
+    ├───────────────── api.php
+    ├───────────────── web.php
     ├──────────── Seed
     ├───────────────── OneSeeder.php
     ├───────────────── TwoSeeder.php
@@ -278,6 +281,21 @@ All files must terminate with Repository word
 
 *Be careful*: Repository has first letter in uppercase and singular
 
+### routes folder
+
+### web.php file or api.php
+
+All routes in this file will be shared in all application as web or as api
+
+ex. web.php:
+
+```php
+<?php Route::get('/hello-world', function (){ echo 'Hello World'; });
+```
+
+Now you can access to yoursite.com/hello-world and see in page "Hello World"
+
+*Be careful*: routes.php are lowercase and plural
 ### Seed folder
 
 All files in this folder are Seeder
@@ -320,21 +338,6 @@ ex.:
 Now you can use sum($a, $b) in all Class of your application
 
 *Be careful*: helpers.php are lowercase and plural
-
-
-### routes.php file
-
-All routes in this file will be shared in all application
-
-ex.:
-
-```php
-<?php Route::get('/hello-world', function (){ echo 'Hello World'; });
-```
-
-Now you can access to yoursite.com/hello-world and see in page "Hello World"
-
-*Be careful*: routes.php are lowercase and plural
 
 ## How to register a Cron
 

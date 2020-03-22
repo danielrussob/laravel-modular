@@ -2,6 +2,7 @@
 
 namespace DNAFactory\Core\Provider;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
@@ -123,10 +124,28 @@ abstract class ModuleDiscoverServiceProvider extends ServiceProvider
 
     protected function loadRoutes($modulePath, $moduleName)
     {
-        $routeFile = $modulePath . DIRECTORY_SEPARATOR . 'routes.php';
+        $this->mapApiRoutes($modulePath, $moduleName);
+        $this->mapWebRoutes($modulePath, $moduleName);
+    }
 
-        if (file_exists($routeFile)) {
-            $this->loadRoutesFrom($routeFile);
+    protected function mapWebRoutes($modulePath, $moduleName)
+    {
+        $web = $modulePath . DIRECTORY_SEPARATOR . 'routes' . DIRECTORY_SEPARATOR . 'web.php';
+
+        if (file_exists($web)) {
+            Route::middleware('web')
+                ->group($web);
+        }
+    }
+
+    protected function mapApiRoutes($modulePath, $moduleName)
+    {
+        $api = $modulePath . DIRECTORY_SEPARATOR . 'routes' . DIRECTORY_SEPARATOR . 'api.php';
+
+        if (file_exists($api)) {
+            Route::prefix('api')
+                ->middleware('api')
+                ->group($api);
         }
     }
 
